@@ -33,9 +33,9 @@ impl TryFrom<char> for Piece {
     }
 }
 
-#[repr(u8)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[rustfmt::skip]
+#[repr(u8)]
 pub enum Rank { R1, R2, R3, R4, R5, R6, R7, R8 }
 
 impl From<u8> for Rank {
@@ -45,15 +45,10 @@ impl From<u8> for Rank {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[rustfmt::skip]
+#[repr(u8)]
 pub enum File {
-    A,
-    B,
-    C,
-    D,
-    E,
-    F,
-    G,
-    H,
+    A, B, C, D, E, F, G, H,
 }
 
 impl From<u8> for File {
