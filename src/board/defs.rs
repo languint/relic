@@ -84,6 +84,10 @@ impl Square {
     pub fn rank(self) -> Rank {
         Rank::from(u8::from(self))
     }
+
+    pub fn index(self) -> u8 {
+        unsafe { std::mem::transmute::<Square, u8>(self) }
+    }
 }
 
 impl From<Square> for u8 {
@@ -145,6 +149,7 @@ mod tests {
         for i in 0u8..=63 {
             let sq = Square::try_from(i).unwrap();
             assert_eq!(u8::from(sq), i);
+            assert_eq!(sq.index(), i);
         }
     }
 
