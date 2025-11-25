@@ -100,7 +100,7 @@ pub enum Square {
 impl Square {
     pub fn new(file: File, rank: Rank) -> Self {
         let index = (rank as u8) * 8 + (file as u8);
-        Square::try_from(index).unwrap()
+        unsafe { Square::try_from(index).unwrap_unchecked() }
     }
 
     pub fn file(self) -> File {
@@ -122,7 +122,7 @@ impl TryFrom<u8> for Square {
     type Error = String;
     fn try_from(value: u8) -> Result<Self, Self::Error> {
         if value <= 63 {
-            Ok(unsafe { std::mem::transmute(value) })
+            Ok(unsafe { std::mem::transmute::<u8, Square>(value) })
         } else {
             Err(format!("'{value}' is not a valid square index"))
         }
