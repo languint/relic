@@ -1,8 +1,8 @@
 pub struct Bitboard(u64);
 
-impl Into<u64> for Bitboard {
-    fn into(self) -> u64 {
-        self.0
+impl From<u64> for Bitboard {
+    fn from(value: u64) -> Self {
+        Self(value)
     }
 }
 
