@@ -1,6 +1,11 @@
 use crate::board::defs::Square;
 
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub struct Bitboard(u64);
+impl Bitboard {
+    pub const EMPTY: Bitboard = Bitboard(0);
+    pub const FULL: Bitboard = Bitboard(u64::MAX);
+}
 
 impl Bitboard {
     #[inline]
@@ -9,8 +14,8 @@ impl Bitboard {
     }
 
     #[inline]
-    pub fn get_square(&self, square: Square) -> Bitboard {
-        &Self::square_mask(square) & self
+    pub fn get_square(self, square: Square) -> Bitboard {
+        Self::square_mask(square) & self
     }
 }
 

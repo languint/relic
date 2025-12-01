@@ -1,4 +1,4 @@
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub struct CastlingRights(u8);
 impl CastlingRights {
     pub const WK: CastlingRights = CastlingRights(0b0001);
@@ -7,6 +7,7 @@ impl CastlingRights {
     pub const BQ: CastlingRights = CastlingRights(0b1000);
 
     pub const ALL: CastlingRights = CastlingRights(0b1111);
+    pub const NONE: CastlingRights = CastlingRights(0b0000);
 }
 
 impl TryFrom<&str> for CastlingRights {
