@@ -1,4 +1,5 @@
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[repr(u8)]
 pub enum Piece {
     Pawn,
     Knight,
@@ -103,6 +104,34 @@ impl TryFrom<u8> for Square {
             Ok(unsafe { std::mem::transmute::<u8, Square>(value) })
         } else {
             Err(format!("'{value}' is not a valid square index"))
+        }
+    }
+}
+
+#[derive(Debug, PartialEq)]
+pub enum Color {
+    White,
+    Black,
+}
+
+impl std::ops::Not for Color {
+    type Output = Color;
+    fn not(self) -> Self::Output {
+        if self == Self::White {
+            Self::Black
+        } else {
+            Self::White
+        }
+    }
+}
+
+impl TryFrom<char> for Color {
+    type Error = String;
+    fn try_from(value: char) -> Result<Self, Self::Error> {
+        match value {
+            'w' => Ok(Self::White),
+            'b' => Ok(Self::Black),
+            _ => Err(format!("{value} is not a color char")),
         }
     }
 }
