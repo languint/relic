@@ -1,3 +1,4 @@
+pub mod game_move;
 pub mod history;
 
 use crate::{board::Board, game::history::History};
